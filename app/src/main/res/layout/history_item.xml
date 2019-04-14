@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="22dp"
+    android:layout_marginEnd="22dp"
+    android:gravity="center_vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        tools:text="2018-12-4"/>
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1.5"
+        android:gravity="end"
+        tools:text="23" />
+
+</LinearLayout>

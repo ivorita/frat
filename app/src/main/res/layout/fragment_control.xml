@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="温度阈值控制:"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:color/white">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/temp_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="4"
+                    android:hint="请输入最低温度"
+                    android:inputType="numberDecimal"
+                    app:theme="@style/InputStyle"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/temp_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入最高温度"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    app:theme="@style/InputStyle"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="湿度阈值控制:"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:color/white">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/hum_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="4"
+                    android:hint="请输入最低湿度"
+                    android:inputType="numberDecimal"
+                    app:theme="@style/InputStyle"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/hum_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="4"
+                    android:hint="请输入最高湿度"
+                    android:inputType="numberDecimal"
+                    app:theme="@style/InputStyle"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@android:color/white" />
+
+        <Button
+            android:id="@+id/camera"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="拍照"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@android:color/white" />
+
+</LinearLayout>
