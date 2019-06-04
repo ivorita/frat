@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class ControlFragment extends Fragment {
 
-
+    boolean door_state = false;
     @BindView(R.id.confirm)
     Button mConfirm;
     @BindView(R.id.camera)
@@ -35,6 +38,8 @@ public class ControlFragment extends Fragment {
     TextInputEditText mHumMin;
     @BindView(R.id.hum_max)
     TextInputEditText mHumMax;
+    @BindView(R.id.door_ctrl)
+    Button doorCtrl;
     private CmdUtils mCmdUtils;
     private Unbinder unbinder;
 
@@ -52,7 +57,7 @@ public class ControlFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.confirm, R.id.camera})
+    @OnClick({R.id.confirm, R.id.camera, R.id.door_ctrl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.confirm:
@@ -121,6 +126,29 @@ public class ControlFragment extends Fragment {
                     }
                 }).start();
                 Snackbar.make(view, "正在拍照，请稍后刷新数据界面", Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.door_ctrl:
+                Log.d(TAG, "doorCtrl: " + doorCtrl.getText().toString());
+                if (doorCtrl.getText().toString().equals("远程开门")) {
+                    doorCtrl.setText("远程关门");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCmdUtils.cmd("lock:1");
+                        }
+                    }).start();
+                    Snackbar.make(view, "开门", Snackbar.LENGTH_SHORT).show();
+                } else if (doorCtrl.getText().toString().equals("远程关门")) {
+                    doorCtrl.setText("远程开门");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCmdUtils.cmd("lock:0");
+                        }
+                    }).start();
+                    Snackbar.make(view, "关门", Snackbar.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }

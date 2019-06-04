@@ -1,9 +1,6 @@
 package com.antelope.android.frat.Fragment;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -19,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.antelope.android.frat.MainActivity;
 import com.antelope.android.frat.R;
 import com.antelope.android.frat.data.Datapoints;
 import com.antelope.android.frat.data.Datastreams;
@@ -31,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.concurrent.Delayed;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +49,7 @@ public class HistoryFragment extends Fragment {
 
     boolean isPress = false;
 
+    //这个url下面那个requestInfo方法有用到
     String url = "http://api.heclouds.com/devices/30964714/datapoints?";
 
     String[] data = new String[]{"温度", "湿度", "门状态", "火情"};
@@ -120,7 +116,12 @@ public class HistoryFragment extends Fragment {
         requestInfo();
     }
 
+
+    /**
+     * 这个就是网络请求函数了
+     */
     private void requestInfo() {
+        //这是那个网络请求工具类的接口，static那个，然后你就要在下面()里写参数了，url...等，反正最后一定是new Callback(){...}
         HttpUtil.sendOkHttpRequest(url, queryTmp, year.getText().toString(), month.getText().toString(), day.getText().toString(), new Callback() {
 
             @Override
@@ -128,11 +129,20 @@ public class HistoryFragment extends Fragment {
                 Log.e("his", "onFailure: ", e);
             }
 
+            /**
+             * 这是请求成功后会执行的方法
+             * @param call
+             * @param response 这个是响应数据，这里是json数据
+             * @throws IOException
+             */
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String responseJson = response.body().string();
-                Log.d("his", "onResponse: " + responseJson);
-                datastreams = handleResponse(responseJson);
+
+                final String responseJson = response.body().string();//把响应内容转为String类型
+                //Log.d("his", "onResponse: " + responseJson);
+
+                //这个datastreams是一个java beanle类对象，我在最上面写了声明，用于保存json解析后的数据
+                datastreams = handleResponse(responseJson);//这个handleResponse()是一个解析json的方法，下面有写
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -161,10 +171,17 @@ public class HistoryFragment extends Fragment {
         }
     }
 
+    /**
+     * 这个handleResponse()是一个解析json的方法
+     *
+     * @param response 这个要传入的参数是上面响应成功的响应内容的String类型，即response
+     * @return 返回类型是某个java bean类型
+     */
     public static Datastreams handleResponse(String response) {
 
         try {
-            //使用JSONArray、Gson、JSONObject,返回一个charJson类对象
+            //使用JSONArray、Gson、JSONObject,返回一个类对象
+            //这下面的你需要根据你接收到的作出修改，不一定是我写的这样
             JSONObject jsonObject = new JSONObject(response);//创建一个JSONObject对象 填入response
             String object = jsonObject.toString();
             Log.d(TAG, "handleResponse: " + object);
